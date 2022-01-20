@@ -118,7 +118,6 @@ def delete_song(music_id):
         return app.make_response((response, 404))
     return {}
 
-
 @bp.route('/test', methods=['GET'])
 def test():
     # This value is for user scp756-221
