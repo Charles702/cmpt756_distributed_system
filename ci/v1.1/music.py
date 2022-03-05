@@ -111,7 +111,7 @@ class Music():
             return r.status_code, None, None, None
 
         item = r.json()['Items'][0]
-        OrigArtist = (item['orig_artist'] if 'orig_artist' in item
+        OrigArtist = (item['origartist'] if 'origartist' in item
                       else None)
         return r.status_code, item['Artist'], item['SongTitle'], OrigArtist
 
