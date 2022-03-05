@@ -60,3 +60,30 @@ def test_orig_artist_oa(mserv, m_id_oa):
     assert trc == 200
     trc, oa = mserv.read_orig_artist(m_id_oa)
     assert trc == 200 and oa == orig_artist
+
+
+def test_full_cycle(mserv):
+    # `mserv` is an instance of the `Music` class
+
+    # Performance at 2010 Vancouver Winter Olympics
+    song = ('k. d. lang', 'Hallelujah')
+    # Soundtrack of first Shrek film (2001)
+    orig_artist = 'Rufus Wainwright'
+    # Original recording from album "Various Positions" (1984)
+    orig_orig_artist = 'Leonard Cohen'
+
+    # Create a music record and read it by music_id,  from other dev change
+    trc, m_id = mserv.create(song[0], song[1], orig_artist)
+    assert trc == 200
+    # query original artist by music_id  , from my change
+    trc, oa = mserv.read_orig_artist(m_id)
+    assert (trc == 200 and oa == orig_artist)
+    # update original aritist, from my change
+    trc = mserv.write_orig_artist(m_id, orig_orig_artist)
+    assert trc == 200
+    # read entire information by music_id ,  from dev change
+    trc, artist, title, oa = mserv.read(m_id)
+    assert (trc == 200 and artist == song[0] and title == song[1]
+            and oa == orig_orig_artist)
+    # The last statement of the test
+    mserv.delete(m_id)
