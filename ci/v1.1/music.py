@@ -49,7 +49,7 @@ class Music():
         payload = {'Artist': artist,
                    'SongTitle': song}
         if orig_artist is not None:
-            payload['OrigArtist'] = orig_artist
+            payload['orig_artist'] = orig_artist
         r = requests.post(
             self._url,
             json=payload,
@@ -111,7 +111,7 @@ class Music():
             return r.status_code, None, None, None
 
         item = r.json()['Items'][0]
-        OrigArtist = (item['OrigArtist'] if 'OrigArtist' in item
+        OrigArtist = (item['orig_artist'] if 'orig_artist' in item
                       else None)
         return r.status_code, item['Artist'], item['SongTitle'], OrigArtist
 
