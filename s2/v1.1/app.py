@@ -93,7 +93,7 @@ def create_song():
         content = request.get_json()
         Artist = content['Artist']
         SongTitle = content['SongTitle']
-        OrigArtist = (content['orig_artist'] if 'orig_artist' in content
+        OrigArtist = (content['Origartist'] if 'orig_artist' in content
                       else None)
     except Exception:
         return json.dumps({"message": "error reading arguments"})
